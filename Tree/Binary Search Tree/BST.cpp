@@ -1,6 +1,5 @@
 #include <iostream>
 using namespace std;
-
 struct Node
 {
     int data;
@@ -8,9 +7,10 @@ struct Node
     Node *right;
 };
 
-struct Node *root;
+Node *root;
+Node *result;
 
-Node *insert(struct Node *node, int data)
+Node *insert(Node *node, int data)
 {
     if (node == NULL)
     {
@@ -27,31 +27,56 @@ Node *insert(struct Node *node, int data)
     {
         node->left = insert(node->left, data);
     }
-
     return node;
 }
 
-void print(Node *node)
+Node *searchElement(Node *node, int key)
 {
-    if (!node)
+    if (node == NULL || node->data == key)
+    {
+        return node;
+    }
+    if (key < node->data)
+    {
+        return searchElement(node->left, key);
+    }
+    else
+    {
+        return searchElement(node->right, key);
+    }
+}
+
+void printNode(Node *node)
+{
+    if (node == NULL)
     {
         return;
     }
-
-    print(node->left);
+    printNode(node->left);
     cout << node->data << " ";
-    print(node->right);
+    printNode(node->right);
 }
 
 int main()
 {
+    root = insert(root, 20);
     root = insert(root, 10);
-    root = insert(root, 5);
-    root = insert(root, 100);
-    root = insert(root, 80);
-    root = insert(root, 2);
-    root = insert(root, 1);
+    root = insert(root, 40);
+    root = insert(root, 30);
+    root = insert(root, 50);
+    printNode(root);
+    cout << endl;
 
-    print(root);
+    int target = 330;
+    result = searchElement(root, target);
+
+    if (result != NULL)
+    {
+        cout << "Found";
+    }
+    else
+    {
+        cout << "Not found";
+    }
     return 0;
 }
