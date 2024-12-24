@@ -17,11 +17,11 @@ void binarySearch(int arr[], int start, int end, int target)
         }
         else
         {
-            cout << "Target found at index: " << mid;
+            cout << "Target found at index: " << mid << endl;
             return;
         }
     }
-    cout << "Target not found";
+    cout << "Target not found" << endl;
 }
 int main()
 {
@@ -30,5 +30,6 @@ int main()
     int start = 0;
     int end = sizeof(arr) / sizeof(arr[0]) - 1;
     binarySearch(arr, start, end, 9);
+    binarySearch(arr, start, end, 10);
     return 0;
 }
